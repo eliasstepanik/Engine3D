@@ -59,6 +59,7 @@ unsafe
     while (!WindowShouldClose())
     {
         e.Update();
+        w.Update();
         w.Draw();
     }
 }

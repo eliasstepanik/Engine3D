@@ -4,18 +4,18 @@ using Engine3D.Extras;
 namespace GameSimple.Models;
 
 [System.Serializable]
-public abstract class IGameObject
+public abstract class GameObject
 {
     
     public abstract string AssemblyMarker { get; set; }
-    public abstract SVector3 Position { get; set; }
-    public abstract SVector3 Scale { get; set; }
-    public abstract SVector3 Rotation { get; set; }
+    public abstract Vector3 Position { get; set; }
+    public abstract Vector3 Scale { get; set; }
+    public abstract Vector3 Rotation { get; set; }
     public abstract bool UI { get; set; }
     public abstract void Draw();
 
     //Write Constructor
-    public IGameObject(string assemblyMarker, SVector3 position, SVector3 scale, SVector3 rotation, bool ui)
+    public GameObject(string assemblyMarker, Vector3 position, Vector3 scale, Vector3 rotation, bool ui)
     {
         AssemblyMarker = assemblyMarker;
         Position = position;

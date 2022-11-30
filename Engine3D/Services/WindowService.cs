@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using GameSimple.Models;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Raylib_CsLo;
 
@@ -9,14 +10,16 @@ public class WindowService
 {
     private readonly ILogger _logger;
     private readonly Settings _settings;
+    private readonly IServiceProvider _serviceProvider;
     
-    public List<IGameObject> RenderQueue { get; set; }
+    public List<GameObject> RenderQueue { get; set; }
     public Camera3D Camera { get; set; }
     
-    public WindowService(ILogger<WindowService> logger, Settings settings)
+    public WindowService(ILogger<WindowService> logger, Settings settings, IServiceProvider serviceProvider)
     {
         _logger = logger;
         _settings = settings;
+        _serviceProvider = serviceProvider;
     }
     
     public void CreateWindow()
@@ -34,41 +37,55 @@ public class WindowService
             _logger.LogInformation("Set Window to Fullscreen");
         }
         
-        RenderQueue = new List<IGameObject>();
+        RenderQueue = new List<GameObject>();
         
         Camera3D camera = new(new(0.0f, 10.0f, 10.0f), new(0.0f, 0.0f, 0.0f), new(0.0f, 1.0f, 0.0f), 45.0f, 0);
 
         Camera = camera;
     }
 
+    public void Update()
+    {
+        var _sceneService = _serviceProvider.GetRequiredService<SceneService>();
+        if (_sceneService.LoadedScenes.Count != 0)
+        {
+            Camera = _sceneService.LoadedScenes[0].Camera3D;
+        }
+    }
+
 
     public void Draw()
     {
-        BeginDrawing();
-
-        ClearBackground(RAYWHITE);
-
-        BeginMode3D(Camera);
-
-        foreach (var gameObject in RenderQueue)
+        unsafe
         {
-            if(!gameObject.UI){
-                gameObject.Draw();
+            var camera3D = Camera;
+            UpdateCamera(ref camera3D);
+            BeginDrawing();
+
+            ClearBackground(RAYWHITE);
+
+            BeginMode3D(Camera);
+
+            foreach (var gameObject in RenderQueue)
+            {
+                if(!gameObject.UI){
+                    gameObject.Draw();
+                }
             }
-        }
-        DrawGrid(10, 1.0f);
-        EndMode3D();
+            DrawGrid(10, 1.0f);
+            EndMode3D();
         
-        foreach (var gameObject in RenderQueue)
-        {
-            if(gameObject.UI){
-                gameObject.Draw();
+            foreach (var gameObject in RenderQueue)
+            {
+                if(gameObject.UI){
+                    gameObject.Draw();
+                }
             }
+            if(_settings.WindowSettings.ShowFPS)
+            {
+                DrawFPS(10, 10);
+            }
+            EndDrawing();
         }
-        if(_settings.WindowSettings.ShowFPS)
-        {
-            DrawFPS(10, 10);
-        }
-        EndDrawing();
     }
 }

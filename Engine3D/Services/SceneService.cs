@@ -6,6 +6,7 @@ using GameSimple.Models;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Raylib_CsLo;
 
 namespace Engine3D.Services;
 
@@ -16,7 +17,7 @@ public class SceneService
     private readonly WindowService _windowService;
     private readonly IServiceProvider _serviceProvider;
     
-    public List<IScene> LoadedScenes { get; set; }
+    public List<Scene> LoadedScenes { get; set; }
 
     public SceneService(ILogger<EngineService> logger, Settings settings, WindowService windowService, IServiceProvider serviceProvider)
     {
@@ -28,15 +29,16 @@ public class SceneService
 
     public void Start()
     {
-        Write(new IScene()
+        /*Write(new Scene()
         {
-            Objects = new List<IGameObject>()
+            Camera3D = new(new(0.0f, 10.0f, 10.0f), new(0.0f, 0.0f, 0.0f), new(0.0f, 1.0f, 0.0f), 45.0f, 0),
+            Objects = new List<GameObject>()
             {
-                new Cube(new SVector3(){x=0,y=0,z=0}, new SVector3(){x=5,y=5,z=5}, new SVector3(){x=0,y=0,z=0}, RED, false)
+                new Cube(Vector3.Zero, new Vector3(5), Vector3.Zero, RED, false)
             }
-        }, "Test");
-        LoadedScenes = new List<IScene>();
-        /*LoadScene(Read("Test"));*/
+        }, "Test2");*/
+        LoadedScenes = new List<Scene>();
+        LoadScene(Read("Test2"));
     }
 
     /*public void Update()
@@ -44,33 +46,53 @@ public class SceneService
         
     }*/
 
-    public void LoadScene(IScene scene)
+    public void LoadScene(Scene scene)
     {
         LoadedScenes.Add(scene);
         foreach (var sceneObject in scene.Objects)
         {
-            _windowService.RenderQueue.Add(sceneObject);
+            _windowService.RenderQueue.Add((GameObject) sceneObject);
         }
 
     }
 
-    public void UnloadScene(IScene scene)
+    public void UnloadScene(Scene scene)
     {
         foreach (var sceneObject in scene.Objects)
         {
-            _windowService.RenderQueue.Remove(sceneObject);
+            _windowService.RenderQueue.Remove((GameObject)sceneObject);
         }
 
         LoadedScenes.Remove(scene);
     }
     
     
-    public IScene Read(string Name)  
+    public Scene Read(string Name)
     {
-
+        var json = File.ReadAllText($"Data/Scenes/{Name}.json");
         //var scene =(IScene) Data.LoadPDP(Name);
+        var Obj = JsonConvert.DeserializeObject<SceneJson>(json);
+        Scene scene = new Scene();
+        scene.Objects = new List<GameObject>();
+        
+        System.Type[] types = System.Reflection.Assembly.GetExecutingAssembly().GetTypes();
+        System.Type[] possible = (from System.Type type in types where type.IsSubclassOf(typeof(GameObject)) select type).ToArray();
 
-        var scene = BinarySerialization.ReadFromBinaryFile<IScene>($"Data/Scenes/{Name}.Scene");
+
+        scene.Camera3D = Obj.Camera3D;
+        foreach (var type in possible)
+        {
+            foreach (JObject obj in Obj.Objects)
+            {
+                string marker = (string) obj.GetValue("AssemblyMarker");
+                if (type.Name.Equals(marker))
+                {
+                    var GameObject = (GameObject)obj.ToObject(type);
+                    scene.Objects.Add(GameObject);
+                }
+                    
+            }
+        }
         
         return scene;
 
@@ -78,9 +100,10 @@ public class SceneService
     
     
     
-    public void Write(IScene scene, string Name)  
+    public void Write(Scene scene, string Name)
     {
-        BinarySerialization.WriteToBinaryFile<IScene>($"Data/Scenes/{Name}.Scene",scene);
+        var json = JsonConvert.SerializeObject(scene, Formatting.Indented);
+        File.WriteAllText( $"Data/Scenes/{Name}.json",json);
         /*Data.SavePDP(scene,Name);*/
     }  
     
