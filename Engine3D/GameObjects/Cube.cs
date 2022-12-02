@@ -6,7 +6,6 @@ using Raylib_CsLo;
 
 namespace Engine3D.GameObjects;
 
-[System.Serializable]
 public class Cube : GameObject
 {
     public Cube(Vector3 position, Vector3 scale, Vector3 rotation, Color color, bool ui) : base(MethodBase.GetCurrentMethod().DeclaringType.Name, position, scale, rotation, ui)

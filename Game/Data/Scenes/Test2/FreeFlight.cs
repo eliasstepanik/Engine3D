@@ -40,7 +40,30 @@ public class FreeFlight : IScriptBehaviour
             scriptDto.Camera = windowCamera;
         }
         
-        Log.Debug($"Camera Target: X:{scriptDto.Camera.target.X} Y:{scriptDto.Camera.target.Y}");
+        if (Raylib.IsKeyDown(KeyboardKey.KEY_D))
+        {
+            var windowCamera = scriptDto.Camera;
+            windowCamera.position.X += 2.0f;
+            scriptDto.Camera = windowCamera;
+        }
+        if (Raylib.IsKeyDown(KeyboardKey.KEY_A))
+        {
+            var windowCamera = scriptDto.Camera;
+            windowCamera.position.X -= 2.0f;
+            scriptDto.Camera = windowCamera;
+        }
+        if (Raylib.IsKeyDown(KeyboardKey.KEY_W))
+        {
+            var windowCamera = scriptDto.Camera;
+            windowCamera.position.Y -= 2.0f;
+            scriptDto.Camera = windowCamera;
+        }
+        if (Raylib.IsKeyDown(KeyboardKey.KEY_S))
+        {
+            var windowCamera = scriptDto.Camera;
+            windowCamera.position.Y += 2.0f;
+            scriptDto.Camera = windowCamera;
+        }
 
         return scriptDto;
     }

@@ -45,14 +45,24 @@ public unsafe class Engine
 
         var app = services.BuildServiceProvider();
 
-    
+        //Set Custom Raylib Logger
         SetTraceLogCallback(&CustomLogging.LogCustom);
-    
-    
+        
+        if (settings.WindowSettings.MSAA4x)
+            SetConfigFlags(ConfigFlags.FLAG_MSAA_4X_HINT);
+
+        if (settings.WindowSettings.VSync)
+            SetConfigFlags(ConfigFlags.FLAG_VSYNC_HINT);
+        
+        if (settings.WindowSettings.WindowMousePassthrough)
+            SetConfigFlags(ConfigFlags.FLAG_WINDOW_MOUSE_PASSTHROUGH);
+        
+        
         var w = app.GetRequiredService<WindowService>();
         var s = app.GetRequiredService<SceneService>();
         var ss = app.GetRequiredService<ScriptService>();
-
+        
+        
         w.CreateWindow();
         s.Start(SceneName);
         ss.Start();

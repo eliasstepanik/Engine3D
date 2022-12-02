@@ -30,5 +30,8 @@ public class WindowSettings
     public bool VSync { get; set; }
     public bool ShowCursor { get; set; }
     public bool ShowFPS { get; set; }
+    public bool MSAA4x { get; set; }
+    
+    public bool WindowMousePassthrough { get; set; }
 }
 

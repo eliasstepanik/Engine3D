@@ -7,7 +7,9 @@
     "Fullscreen": false,
     "VSync": true,
     "ShowCursor": true,
-    "ShowFPS": true
+    "ShowFPS": true,
+    "MSAA4x": true,
+    "WindowMousePassthrough": false
   },
   "LoggingSettings": {
     "LogLevel": "Debug",

@@ -49,6 +49,7 @@
   ],
   "Scripts": [
     "FreeFlight.cs",
-    "CubeUpdate.cs"
+    "CubeUpdate.cs",
+    "DebugText.cs"
   ]
 }

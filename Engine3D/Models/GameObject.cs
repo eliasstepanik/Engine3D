@@ -3,7 +3,6 @@ using Engine3D.Extras;
 
 namespace GameSimple.Models;
 
-[System.Serializable]
 public abstract class GameObject
 {
     

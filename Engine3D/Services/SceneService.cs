@@ -32,6 +32,12 @@ public class SceneService
         LoadedScenes = new List<Scene>();
         LoadScene(Read(Name));
     }
+
+    public void Update(string Name)
+    {
+        LoadedScenes = new List<Scene>();
+        LoadScene(Read(Name));
+    }
     
     public void LoadScene(Scene scene)
     {

@@ -21,12 +21,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Data\Scenes\Test2\CubeUpdate.cs">
+      <Content Include="Data\Scenes\*\*">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Compile>
-      <Compile Update="Data\Scenes\Test2\FreeFlight.cs">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Compile>
+      </Content>
     </ItemGroup>
 
 </Project>
