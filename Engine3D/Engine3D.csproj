@@ -10,6 +10,7 @@
 
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="12.0.0" />
+      <PackageReference Include="CS-Script" Version="4.4.6" />
       <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
       <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
@@ -29,6 +30,23 @@
         <Content Include="Data\*\*">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
+        <Content Include="Data\Scenes\Test2\Test2.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Data\Shaders\vs\base_lighting.glsl">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Data\Scenes\Test2\TestScript.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Data\Scenes\Test2\main.csx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Remove="Data\Scenes\Test2\omnisharp.json" />
     </ItemGroup>
 
 </Project>

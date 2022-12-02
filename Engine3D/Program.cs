@@ -1,9 +1,9 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
+using CSScriptLib;
 using Engine3D.Extras;
 using Engine3D.Services;
 using GameSimple;
-using GameSimple.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -11,6 +11,16 @@ using Raylib_CsLo;
 using Serilog;
 using Serilog.Events;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
+using Settings = GameSimple.Models.Settings;
+
+
+
+
+dynamic test = CSScript.Evaluator.LoadFile("Data/Scenes/Test2/main.csx");
+int result = test.Sum(1, 2);
+
+Console.WriteLine(result);
+
 
 unsafe
 {
