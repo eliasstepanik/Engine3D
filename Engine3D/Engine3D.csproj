@@ -21,28 +21,4 @@
       <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
       <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     </ItemGroup>
-
-    <ItemGroup>
-        <Content Include="Config\*">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Data\*\*">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Remove="Data\Scenes\Test2\TestScript.cs" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Update="Data\Scenes\Test2\main.csx">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Remove="Data\Scenes\Test2\omnisharp.json" />
-      <None Update="Data\Scenes\Test2\Test2.cs">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
-
 </Project>
