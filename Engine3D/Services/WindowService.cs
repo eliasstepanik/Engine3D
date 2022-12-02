@@ -46,46 +46,40 @@ public class WindowService
 
     public void Update()
     {
-        var _sceneService = _serviceProvider.GetRequiredService<SceneService>();
-        if (_sceneService.LoadedScenes.Count != 0)
-        {
-            Camera = _sceneService.LoadedScenes[0].Camera3D;
-        }
+        
     }
+    
 
 
     public void Draw()
     {
-        unsafe
+        var camera3D = Camera;
+        UpdateCamera(ref camera3D);
+        BeginDrawing();
+
+        ClearBackground(RAYWHITE);
+
+        BeginMode3D(Camera);
+
+        foreach (var gameObject in RenderQueue)
         {
-            var camera3D = Camera;
-            UpdateCamera(ref camera3D);
-            BeginDrawing();
-
-            ClearBackground(RAYWHITE);
-
-            BeginMode3D(Camera);
-
-            foreach (var gameObject in RenderQueue)
-            {
-                if(!gameObject.UI){
-                    gameObject.Draw();
-                }
+            if(!gameObject.UI){
+                gameObject.Draw();
             }
-            DrawGrid(10, 1.0f);
-            EndMode3D();
-        
-            foreach (var gameObject in RenderQueue)
-            {
-                if(gameObject.UI){
-                    gameObject.Draw();
-                }
-            }
-            if(_settings.WindowSettings.ShowFPS)
-            {
-                DrawFPS(10, 10);
-            }
-            EndDrawing();
         }
+        DrawGrid(10, 1.0f);
+        EndMode3D();
+        
+        foreach (var gameObject in RenderQueue)
+        {
+            if(gameObject.UI){
+                gameObject.Draw();
+            }
+        }
+        if(_settings.WindowSettings.ShowFPS)
+        {
+            DrawFPS(10, 10);
+        }
+        EndDrawing();
     }
 }

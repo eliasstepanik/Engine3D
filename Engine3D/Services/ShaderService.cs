@@ -10,11 +10,13 @@ public class ShaderService
     private readonly WindowService _windowService;
     private readonly IServiceProvider _serviceProvider;
     
-    public ShaderService(ILogger<EngineService> logger, Settings settings, WindowService windowService, IServiceProvider serviceProvider)
+    public ShaderService(ILogger<ShaderService> logger, Settings settings, WindowService windowService, IServiceProvider serviceProvider)
     {
         _logger = logger;
         _settings = settings;
         _windowService = windowService;
         _serviceProvider = serviceProvider;
     }
+    
+    //TODO: Create the Render Pipeline
 }

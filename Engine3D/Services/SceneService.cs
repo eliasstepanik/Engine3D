@@ -19,7 +19,7 @@ public class SceneService
     
     public List<Scene> LoadedScenes { get; set; }
 
-    public SceneService(ILogger<EngineService> logger, Settings settings, WindowService windowService, IServiceProvider serviceProvider)
+    public SceneService(ILogger<SceneService> logger, Settings settings, WindowService windowService, IServiceProvider serviceProvider)
     {
         _logger = logger;
         _settings = settings;
@@ -27,25 +27,12 @@ public class SceneService
         _serviceProvider = serviceProvider;
     }
 
-    public void Start()
+    public void Start(string Name)
     {
-        /*Write(new Scene()
-        {
-            Camera3D = new(new(0.0f, 10.0f, 10.0f), new(0.0f, 0.0f, 0.0f), new(0.0f, 1.0f, 0.0f), 45.0f, 0),
-            Objects = new List<GameObject>()
-            {
-                new Cube(Vector3.Zero, new Vector3(5), Vector3.Zero, RED, false)
-            }
-        }, "Test2");*/
         LoadedScenes = new List<Scene>();
-        LoadScene(Read("Test2"));
+        LoadScene(Read(Name));
     }
-
-    /*public void Update()
-    {
-        
-    }*/
-
+    
     public void LoadScene(Scene scene)
     {
         LoadedScenes.Add(scene);
@@ -53,6 +40,9 @@ public class SceneService
         {
             _windowService.RenderQueue.Add((GameObject) sceneObject);
         }
+
+        _windowService.Camera = scene.Camera3D;
+
 
     }
 
@@ -69,7 +59,7 @@ public class SceneService
     
     public Scene Read(string Name)
     {
-        var json = File.ReadAllText($"Data/Scenes/{Name}.json");
+        var json = File.ReadAllText($"Data/Scenes/{Name}/{Name}.json");
         //var scene =(IScene) Data.LoadPDP(Name);
         var Obj = JsonConvert.DeserializeObject<SceneJson>(json);
         Scene scene = new Scene();
@@ -93,6 +83,9 @@ public class SceneService
                     
             }
         }
+
+        scene.Scripts = Obj.Scripts;
+        scene.Name = Obj.Name;
         
         return scene;
 
@@ -103,8 +96,7 @@ public class SceneService
     public void Write(Scene scene, string Name)
     {
         var json = JsonConvert.SerializeObject(scene, Formatting.Indented);
-        File.WriteAllText( $"Data/Scenes/{Name}.json",json);
-        /*Data.SavePDP(scene,Name);*/
+        File.WriteAllText( $"Data/Scenes/{Name}/{Name}.json",json);
     }  
     
 }
