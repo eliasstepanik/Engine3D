@@ -12,7 +12,7 @@ var scene = new Scene();
 
 scene.Objects = new List<GameObject>()
 {
-    new MeshPlane("Plane",Vector3.Zero, new(10, 10, 0), Raylib.WHITE),
+    new MeshPlane("Plane",Vector3.Zero, new(10, 10, 0), Raylib.WHITE, new (3,3,0)),
     new MeshCube("Cube",Vector3.Zero, new(2, 4.0f, 2.0f), Raylib.WHITE)
 };
 

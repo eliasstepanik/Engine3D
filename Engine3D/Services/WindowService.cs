@@ -67,7 +67,6 @@ public class WindowService
                 gameObject.Draw();
             }
         }
-        DrawGrid(10, 1.0f);
         EndMode3D();
         
         foreach (var gameObject in RenderQueue)
