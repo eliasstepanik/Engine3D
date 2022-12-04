@@ -12,7 +12,7 @@ public class WindowService
     private readonly Settings _settings;
     private readonly IServiceProvider _serviceProvider;
     
-    public List<GameObject> RenderQueue { get; set; }
+    public RenderQueue RenderQueue{ get; set; }
     public Camera3D Camera { get; set; }
     
     public WindowService(ILogger<WindowService> logger, Settings settings, IServiceProvider serviceProvider)
@@ -37,7 +37,7 @@ public class WindowService
             _logger.LogInformation("Set Window to Fullscreen");
         }
         
-        RenderQueue = new List<GameObject>();
+        RenderQueue = new RenderQueue();
         
         Camera3D camera = new(new(0.0f, 10.0f, 10.0f), new(0.0f, 0.0f, 0.0f), new(0.0f, 1.0f, 0.0f), 45.0f, 0);
 

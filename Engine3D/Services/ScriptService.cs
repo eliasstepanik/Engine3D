@@ -14,8 +14,9 @@ public class ScriptService
     private readonly ShaderService _shaderService;
     private readonly IServiceProvider _serviceProvider;
 
-    private List<dynamic> Scripts;
-    
+    private List<dynamic> _scripts;
+    private Dictionary<string, dynamic> _dynamicData;
+
     public ScriptService(ILogger<ScriptService> logger, Settings settings, WindowService windowService, SceneService sceneService, ShaderService shaderService, IServiceProvider serviceProvider)
     {
         _logger = logger;
@@ -28,16 +29,16 @@ public class ScriptService
 
     public void Start()
     {
-        Scripts = new List<dynamic>();
-    
+        _scripts = new List<dynamic>();
+        _dynamicData = new Dictionary<string, dynamic>();
 
         foreach (var scene in _sceneService.LoadedScenes)
         {
-            foreach (var Script in scene.Scripts)
+            Parallel.ForEach(scene.Scripts, i =>
             {
-                _logger.LogDebug("Found Script: Data/Scenes/{SceneName}/{Script}", scene.Name, Script);
-                Scripts.Add(CSScript.Evaluator.LoadFile($"Data/Scenes/{scene.Name}/{Script}"));
-            }
+                _logger.LogDebug("Found Script: Data/Scenes/{SceneName}/Scripts/{Script}", scene.Name, i);
+                _scripts.Add(CSScript.Evaluator.LoadFile($"Data/Scenes/{scene.Name}/Scripts/{i}"));
+            });
         }
 
 
@@ -45,14 +46,16 @@ public class ScriptService
         scriptDto.Camera = _windowService.Camera;
         scriptDto.LoadedScenes = _sceneService.LoadedScenes;
         scriptDto.RenderQueue = _windowService.RenderQueue;
-        
-        foreach (dynamic script in Scripts)
+        scriptDto.DynamicData = _dynamicData;
+
+        foreach (dynamic script in _scripts)
         {
             ScriptDto result = script.Start(scriptDto);
             _windowService.Camera = result.Camera;
             _sceneService.LoadedScenes = result.LoadedScenes;
             _windowService.RenderQueue = result.RenderQueue;
-                
+            _dynamicData = result.DynamicData;
+
         }
     }
 
@@ -62,14 +65,15 @@ public class ScriptService
         scriptDto.Camera = _windowService.Camera;
         scriptDto.LoadedScenes = _sceneService.LoadedScenes;
         scriptDto.RenderQueue = _windowService.RenderQueue;
+        scriptDto.DynamicData = _dynamicData;
         
-        foreach (dynamic script in Scripts)
+        foreach (dynamic script in _scripts)
         {
             ScriptDto result = script.Update(scriptDto);
             _windowService.Camera = result.Camera;
             _sceneService.LoadedScenes = result.LoadedScenes;
             _windowService.RenderQueue = result.RenderQueue;
-                
+            _dynamicData = result.DynamicData;
         }
     }
 }

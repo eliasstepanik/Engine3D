@@ -5,9 +5,9 @@
     "Title": "My Game",
     "TargetFPS": 60,
     "Fullscreen": false,
-    "VSync": true,
+    "VSync": false,
     "ShowCursor": true,
-    "ShowFPS": true,
+    "ShowFPS": false,
     "MSAA4x": true,
     "WindowMousePassthrough": false
   },

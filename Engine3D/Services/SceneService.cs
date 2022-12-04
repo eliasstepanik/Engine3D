@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using System.Reflection;
 using AutoMapper;
 using Engine3D.Extras;
 using Engine3D.GameObjects;
@@ -70,8 +71,34 @@ public class SceneService
         var Obj = JsonConvert.DeserializeObject<SceneJson>(json);
         Scene scene = new Scene();
         scene.Objects = new List<GameObject>();
+
+
+        List<Type> types = new List<Type>();
         
-        System.Type[] types = System.Reflection.Assembly.GetExecutingAssembly().GetTypes();
+        System.Type[] typesCurrentProject = System.Reflection.Assembly.GetExecutingAssembly().GetTypes();
+        List<System.Type[]> typesGameProject = new List<Type[]>();
+
+        foreach (var assembly in GetSolutionAssemblies())
+        {
+            typesGameProject.Add(assembly.GetTypes());
+        }
+        
+        foreach (var types1 in typesGameProject)
+        {
+            foreach (var type in types1)
+            {
+                types.Add(type);
+            }
+        }
+        
+        foreach (var type in typesCurrentProject)
+        {
+            types.Add(type);
+        }
+        
+        
+        
+        
         System.Type[] possible = (from System.Type type in types where type.IsSubclassOf(typeof(GameObject)) select type).ToArray();
 
 
@@ -97,7 +124,12 @@ public class SceneService
 
     }  
     
-    
+    public static Assembly[] GetSolutionAssemblies()
+    {
+        var assemblies = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "Game.dll")
+            .Select(x => Assembly.Load(AssemblyName.GetAssemblyName(x)));
+        return assemblies.ToArray();
+    }
     
     public void Write(Scene scene, string Name)
     {

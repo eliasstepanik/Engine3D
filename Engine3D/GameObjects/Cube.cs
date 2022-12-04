@@ -8,12 +8,13 @@ namespace Engine3D.GameObjects;
 
 public class Cube : GameObject
 {
-    public Cube(Vector3 position, Vector3 scale, Vector3 rotation, Color color, bool ui) : base(MethodBase.GetCurrentMethod().DeclaringType.Name, position, scale, rotation, ui)
+    public Cube(string name,Vector3 position, Vector3 scale, Vector3 rotation, Color color, bool ui) : base(name,MethodBase.GetCurrentMethod().DeclaringType.Name, position, scale, rotation, ui)
     {
         Color = color;
     }
 
     public override string AssemblyMarker { get; set; }
+    public override string Name { get; set; }
     public override Vector3 Position { get; set; }
     public override Vector3 Scale { get; set; }
     public override Vector3 Rotation { get; set; }

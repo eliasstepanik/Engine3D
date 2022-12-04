@@ -14,10 +14,9 @@ public class CubeUpdate : IScriptBehaviour
     
     public ScriptDto Update(ScriptDto scriptDto)
     {
-        
-        var pos = scriptDto.RenderQueue[0].Position;
-        
-        scriptDto.RenderQueue[0].Position = new Vector3(pos.X, pos.Y +0.01f, pos.Z);
+
+        var Cube = scriptDto.RenderQueue.getByName("Cube");
+        Cube.Position = Cube.Position with { Y = Cube.Position.Y +0.01f };
         
 
         return scriptDto;

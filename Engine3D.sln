@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine3D", "Engine3D\Engine
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game", "Game\Game.csproj", "{6F491100-3850-4AE6-8D72-C6A113396E64}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SceneBuilder", "SceneBuilder\SceneBuilder.csproj", "{8321D1C1-01A0-4CE5-A378-52357F009111}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{6F491100-3850-4AE6-8D72-C6A113396E64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F491100-3850-4AE6-8D72-C6A113396E64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F491100-3850-4AE6-8D72-C6A113396E64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8321D1C1-01A0-4CE5-A378-52357F009111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8321D1C1-01A0-4CE5-A378-52357F009111}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8321D1C1-01A0-4CE5-A378-52357F009111}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8321D1C1-01A0-4CE5-A378-52357F009111}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
