@@ -3,6 +3,7 @@ start;
 :Game.Program;
 :Engine3D.Engine;
 :Engine3D.Services.WindowService.CreateWindow();
+
 :Engine3D.Services.SceneService.Start("SceneName");
 :Engine3D.Services.ScriptService.Start();
 while (!WindowShouldClose)
