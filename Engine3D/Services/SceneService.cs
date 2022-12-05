@@ -69,6 +69,9 @@ public class SceneService
         var json = File.ReadAllText($"Data/Scenes/{Name}/{Name}.json");
         //var scene =(IScene) Data.LoadPDP(Name);
         var Obj = JsonConvert.DeserializeObject<SceneJson>(json);
+        _logger.LogDebug($"Read Data/Scenes/{Name}/{Name}.json");
+        
+        
         Scene scene = new Scene();
         scene.Objects = new List<GameObject>();
 
@@ -78,7 +81,7 @@ public class SceneService
         System.Type[] typesCurrentProject = System.Reflection.Assembly.GetExecutingAssembly().GetTypes();
         List<System.Type[]> typesGameProject = new List<Type[]>();
 
-        foreach (var assembly in GetSolutionAssemblies())
+        foreach (var assembly in GetGameAssembly())
         {
             typesGameProject.Add(assembly.GetTypes());
         }
@@ -124,7 +127,7 @@ public class SceneService
 
     }  
     
-    public static Assembly[] GetSolutionAssemblies()
+    public static Assembly[] GetGameAssembly()
     {
         var assemblies = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "Game.dll")
             .Select(x => Assembly.Load(AssemblyName.GetAssemblyName(x)));
