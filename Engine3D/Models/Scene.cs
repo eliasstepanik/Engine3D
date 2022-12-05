@@ -9,6 +9,8 @@ public class SceneJson
     public Camera3D Camera3D { get; set; }
     public List<Object> Objects { get; set; }
     public List<string> Scripts { get; set; }
+    
+    //TODO Add RenderPipeline
 }
 
 public class Scene
@@ -17,4 +19,5 @@ public class Scene
     public Camera3D Camera3D { get; set; }
     public List<GameObject> Objects { get; set; }
     public List<string> Scripts { get; set; }
+    //TODO Add RenderPipeline
 }

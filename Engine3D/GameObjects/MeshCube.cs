@@ -5,15 +5,13 @@ using Raylib_CsLo;
 
 namespace Engine3D.GameObjects;
 
-public class MeshCube : GameObject
+public class MeshCube : MeshObject
 {
     public MeshCube(string name,Vector3 position, Vector3 scale, Color color) : base(name,MethodBase.GetCurrentMethod().DeclaringType.Name, position, scale, Vector3.Zero, false)
     {
         Color = color;
-        //Model = LoadModelFromMesh(GenMeshCube(scale.X, scale.Y, scale.Z));
+        Model = LoadModelFromMesh(GenMeshCube(scale.X, scale.Y, scale.Z));
     }
-    
-    public Model Model { get; set; }
 
     public override string AssemblyMarker { get; set; }
     public override string Name { get; set; }
@@ -26,4 +24,6 @@ public class MeshCube : GameObject
     {
         DrawModel(Model, Position, 1.0f, Color);
     }
+
+    public override Model Model { get; set; }
 }
