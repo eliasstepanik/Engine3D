@@ -61,18 +61,18 @@ public unsafe class Engine
         var w = app.GetRequiredService<WindowService>();
         var s = app.GetRequiredService<SceneService>();
         var ss = app.GetRequiredService<ScriptService>();
-        
+        var shs = app.GetRequiredService<ShaderService>();
         
         w.CreateWindow();
         s.Start(SceneName);
+        shs.Start();
         ss.Start();
-    
-    
 
         while (!WindowShouldClose())
         {
             w.Update();
             ss.Update();
+            shs.Draw();
             w.Draw();
         
         }

@@ -1,4 +1,5 @@
 ﻿using System.Xml.Serialization;
+using Newtonsoft.Json.Linq;
 using Raylib_CsLo;
 
 namespace GameSimple.Models;
@@ -10,7 +11,7 @@ public class SceneJson
     public List<Object> Objects { get; set; }
     public List<string> Scripts { get; set; }
     
-    //TODO Add RenderPipeline
+    public Object RenderPipeline { get; set; }
 }
 
 public class Scene
@@ -19,5 +20,5 @@ public class Scene
     public Camera3D Camera3D { get; set; }
     public List<GameObject> Objects { get; set; }
     public List<string> Scripts { get; set; }
-    //TODO Add RenderPipeline
+    public RenderPipeline RenderPipeline { get; set; }
 }

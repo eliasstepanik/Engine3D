@@ -53,8 +53,6 @@ public class WindowService
 
     public void Draw()
     {
-        var camera3D = Camera;
-        UpdateCamera(ref camera3D);
         BeginDrawing();
 
         ClearBackground(RAYWHITE);

@@ -103,7 +103,7 @@ public class SceneService
         
         
         System.Type[] possible = (from System.Type type in types where type.IsSubclassOf(typeof(GameObject)) select type).ToArray();
-
+        System.Type[] possible2 = (from System.Type type in types where type.IsSubclassOf(typeof(RenderPipeline)) select type).ToArray();
 
         scene.Camera3D = Obj.Camera3D;
         foreach (var type in possible)
@@ -120,13 +120,25 @@ public class SceneService
             }
         }
 
+        var jrp = (JObject)Obj.RenderPipeline;
+        string marker2 = (string)jrp.GetValue("AssemblyMarker");
+
+        foreach (var type in possible2)
+        {
+            if (type.Name.Equals(marker2))
+            {
+                scene.RenderPipeline = (RenderPipeline)jrp.ToObject(type);
+            }
+        }
+        
+
         scene.Scripts = Obj.Scripts;
         scene.Name = Obj.Name;
         
         return scene;
 
-    }  
-    
+    }
+
     public static Assembly[] GetGameAssembly()
     {
         var assemblies = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "Game.dll")

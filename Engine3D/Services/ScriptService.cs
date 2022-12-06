@@ -13,7 +13,7 @@ public class ScriptService
     private readonly SceneService _sceneService;
     private readonly ShaderService _shaderService;
     private readonly IServiceProvider _serviceProvider;
-
+    
     private List<dynamic> _scripts;
     private Dictionary<string, dynamic> _dynamicData;
 
@@ -46,6 +46,7 @@ public class ScriptService
         scriptDto.Camera = _windowService.Camera;
         scriptDto.LoadedScenes = _sceneService.LoadedScenes;
         scriptDto.RenderQueue = _windowService.RenderQueue;
+        scriptDto.RenderPipeline = _shaderService.RenderPipeline;
         scriptDto.DynamicData = _dynamicData;
 
         foreach (dynamic script in _scripts)
@@ -54,6 +55,7 @@ public class ScriptService
             _windowService.Camera = result.Camera;
             _sceneService.LoadedScenes = result.LoadedScenes;
             _windowService.RenderQueue = result.RenderQueue;
+            _shaderService.RenderPipeline = result.RenderPipeline;
             _dynamicData = result.DynamicData;
 
         }
@@ -65,14 +67,17 @@ public class ScriptService
         scriptDto.Camera = _windowService.Camera;
         scriptDto.LoadedScenes = _sceneService.LoadedScenes;
         scriptDto.RenderQueue = _windowService.RenderQueue;
+        scriptDto.RenderPipeline = _shaderService.RenderPipeline;
         scriptDto.DynamicData = _dynamicData;
         
         foreach (dynamic script in _scripts)
         {
+            //script.Update(scriptDto);
             ScriptDto result = script.Update(scriptDto);
             _windowService.Camera = result.Camera;
             _sceneService.LoadedScenes = result.LoadedScenes;
             _windowService.RenderQueue = result.RenderQueue;
+            _shaderService.RenderPipeline = result.RenderPipeline;
             _dynamicData = result.DynamicData;
         }
     }

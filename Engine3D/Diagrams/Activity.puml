@@ -7,7 +7,7 @@ partition Initialization {
 :Game.Program.Engine.Create;
 :Read Settings Json;
 :Register Services;
-split
+fork
     partition WindowService.CreateWindow{
         :InitWindow;
         :SetTargetFPS;
@@ -16,39 +16,35 @@ split
         :SetTempCamera;
     }
     
-split again
+fork again
     partition SceneService.Start{
-        partition SceneService.LoadScene{
-            partition SceneService.Read{
-                :ReadSceneJson;
-                :ConvertDataTypes;
-                :Return Scene;
-            }
-            :SaveSceneToLoadedScenes;
-            :AddObjectsToRenderQueue;
-            :SetCamera;
-        }
+        :ReadSceneJson;
+        :ConvertDataTypes;
+        :Return Scene;
+        :SaveSceneToLoadedScenes;
+        :AddObjectsToRenderQueue;
+        :SetCamera;
     }
     
-split again
+fork again
     partition ScriptService.Start{
         :GetScripts;
         :InitScripts;
         :SendData;
         :WriteReturnedDataToEngine;
     }
-end split   
+end fork   
 }
 partition Running{
     while (!WindowShouldClose)
-        split
+        fork
             partition ScriptService.Update{
                 :SendData;
                 :WriteReturnedDataToEngine;
             }
-        split again
+        fork again
             :WindowService.Draw;
-        end split   
+        end fork   
     endwhile
 }  
     

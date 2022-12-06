@@ -3,6 +3,7 @@ using Engine3D.GameObjects.Ui;
 using GameSimple.Models;
 using GameSimple.Models.ScriptInterfaces;
 using Raylib_CsLo;
+using Serilog;
 
 public class DebugText : IScriptBehaviour
 {
@@ -11,6 +12,7 @@ public class DebugText : IScriptBehaviour
 
     public ScriptDto Update(ScriptDto scriptDto)
     {
+        Log.Debug("asdasd");
         if (Raylib.IsKeyPressed(KeyboardKey.KEY_F4))
         {
             show = !show;
