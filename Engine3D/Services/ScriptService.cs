@@ -1,6 +1,8 @@
 using CSScriptLib;
 using GameSimple.Models;
 using Microsoft.Extensions.Logging;
+using Serilog;
+using ILogger = Microsoft.Extensions.Logging.ILogger;
 using Settings = CSScriptLib.Settings;
 
 namespace Engine3D.Services;
@@ -34,11 +36,17 @@ public class ScriptService
 
         foreach (var scene in _sceneService.LoadedScenes)
         {
-            Parallel.ForEach(scene.Scripts, i =>
+            /*Parallel.ForEach(scene.Scripts, i =>
             {
                 _logger.LogDebug("Found Script: Data/Scenes/{SceneName}/Scripts/{Script}", scene.Name, i);
                 _scripts.Add(CSScript.Evaluator.LoadFile($"Data/Scenes/{scene.Name}/Scripts/{i}"));
-            });
+            });*/
+
+            foreach (var sceneScript in scene.Scripts)
+            {
+                _logger.LogDebug("Found Script: Data/Scenes/{SceneName}/Scripts/{Script}", scene.Name, sceneScript);
+                _scripts.Add(CSScript.Evaluator.LoadFile($"Data/Scenes/{scene.Name}/Scripts/{sceneScript}"));
+            }
         }
 
 
@@ -73,7 +81,15 @@ public class ScriptService
         foreach (dynamic script in _scripts)
         {
             //script.Update(scriptDto);
-            ScriptDto result = script.Update(scriptDto);
+            var result = script.Update(scriptDto);
+            if (result == null)
+            {
+                Log.Error("Got not result Data from " + script.Name);
+                return;
+            }
+                
+                
+            
             _windowService.Camera = result.Camera;
             _sceneService.LoadedScenes = result.LoadedScenes;
             _windowService.RenderQueue = result.RenderQueue;

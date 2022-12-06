@@ -22,7 +22,7 @@
   },
   "Objects": [
     {
-      "Name": "MeshCube",
+      "Name": "Cube",
       "AssemblyMarker": "MeshCube",
       "Position": {
         "X": 0.0,
@@ -30,9 +30,9 @@
         "Z": 0.0
       },
       "Scale": {
-        "X": 5.0,
-        "Y": 5.0,
-        "Z": 5.0
+        "X": 3.0,
+        "Y": 3.0,
+        "Z": 3.0
       },
       "Rotation": {
         "X": 0.0,
@@ -40,9 +40,9 @@
         "Z": 0.0
       },
       "Color": {
-        "r": 230,
-        "g": 41,
-        "b": 55,
+        "r": 255,
+        "g": 255,
+        "b": 255,
         "a": 255
       },
       "UI": false
@@ -52,7 +52,7 @@
       "AssemblyMarker": "MeshPlane",
       "Position": {
         "X": 0.0,
-        "Y": 0.0,
+        "Y": -1.0,
         "Z": 0.0
       },
       "Scale": {
@@ -71,9 +71,9 @@
         "Z": 0.0
       },
       "Color": {
-        "r": 0,
-        "g": 0,
-        "b": 230,
+        "r": 255,
+        "g": 255,
+        "b": 255,
         "a": 255
       },
       "UI": false
@@ -81,9 +81,8 @@
   ],
   "Scripts": [
     "FreeFlight.cs",
-    "CubeUpdate.cs",
-    "DebugText.cs",
-    "LightUpdate.cs"
+    "LightUpdate.cs",
+    "CubeUpdate.cs"
   ],
   "RenderPipeline": {
     "Lights": null,

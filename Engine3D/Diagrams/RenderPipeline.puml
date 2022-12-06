@@ -1,13 +1,14 @@
 @startjson
 #highlight "Name"
 {
-    "Name":"PipelineName",
-    "AssemblyMarker": "ClassNameOfChild",
-    "ShaderFiles":[
-        {
-            "VertexShaderFile": "File.vert",
-            "FragmentShaderFile": "File.frag"
+    "RenderPipeline": {
+        "Lights": null,
+        "Name": "Lighting",
+        "AssemblyMarker": "BasicLighting",
+        "ShaderFile": {
+          "VertexShaderFile": "base_lighting.vert",
+          "FragmentShaderFile": "lighting.frag"
         }
-    ]
+      }
 }
 @endjson

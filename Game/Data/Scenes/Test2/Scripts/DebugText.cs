@@ -12,17 +12,16 @@ public class DebugText : IScriptBehaviour
 
     public ScriptDto Update(ScriptDto scriptDto)
     {
-        Log.Debug("asdasd");
         if (Raylib.IsKeyPressed(KeyboardKey.KEY_F4))
         {
             show = !show;
         }
 
-        if (isInQueue(scriptDto) && !show)
+        if (IsInQueue(scriptDto) && !show)
         {
             scriptDto.RenderQueue.Remove(text);
         }
-        else if (!isInQueue(scriptDto) && show)
+        else if (!IsInQueue(scriptDto) && show)
         {
             scriptDto.RenderQueue.Add(text);
         }
@@ -44,7 +43,7 @@ public class DebugText : IScriptBehaviour
     }
 
 
-    bool isInQueue(ScriptDto scriptDto)
+    bool IsInQueue(ScriptDto scriptDto)
     {
         if (scriptDto.RenderQueue.Contains(text))
             return true;

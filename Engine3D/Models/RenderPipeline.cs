@@ -27,7 +27,11 @@ public abstract unsafe class RenderPipeline
             var vertPath = string.Format("Data/Scenes/{0}/Shader/{1}",scriptDto.LoadedScenes[0].Name, ShaderFile.VertexShaderFile);
             var fragPath = string.Format("Data/Scenes/{0}/Shader/{1}",scriptDto.LoadedScenes[0].Name, ShaderFile.FragmentShaderFile);
             
-            _shader = LoadShader(vertPath,fragPath);
+            //_shader = LoadShader(vertPath,fragPath);
+
+            var vertFileData = File.ReadAllText(vertPath);
+            var fragFileData = File.ReadAllText(fragPath);
+            _shader = LoadShaderFromMemory(vertFileData, fragFileData);
         }
         catch
         {

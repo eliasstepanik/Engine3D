@@ -16,7 +16,7 @@ public class CubeUpdate : IScriptBehaviour
     {
 
         var Cube = scriptDto.RenderQueue.getByName("Cube");
-        Cube.Position = Cube.Position with { Y = Cube.Position.Y +0.01f };
+        scriptDto.RenderQueue.getByName("Cube").Position = Cube.Position with { Y = Cube.Position.Y +0.01f };
         
 
         return scriptDto;

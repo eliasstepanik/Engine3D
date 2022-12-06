@@ -8,13 +8,20 @@ using Raylib_CsLo;
 
 public class LightInit : IScriptBehaviour
 {
+    private Random _random;
+    
     public ScriptDto Update(ScriptDto scriptDto)
     {
-        var rp = (BasicLighting)scriptDto.RenderPipeline;
-        foreach (var rpLight in rp.Lights)
+        
+        
+        var rp = (Game.Data.Scenes.Test2.RenderPipeLine.BasicLighting)scriptDto.RenderPipeline;
+        for (var i = 0; i < rp.Lights.Count; i++)
         {
-            rp.UpdateLightValues(rpLight);
+            //TODO Cont here
+            rp.UpdateLightValues(rp.Lights[i]);
         }
+        
+        
 
         scriptDto.RenderPipeline = rp;
         return scriptDto;
@@ -22,6 +29,8 @@ public class LightInit : IScriptBehaviour
 
     public ScriptDto Start(ScriptDto scriptDto)
     {
+        _random = new Random();
+        
         var rp = (BasicLighting)scriptDto.RenderPipeline;
         rp.Lights.Add(rp.CreateLight(LightType.LIGHT_POINT, new (-2,1,-2),Vector3.Zero, Raylib.YELLOW));
         rp.Lights.Add(rp.CreateLight(LightType.LIGHT_POINT, new (2,1,2),Vector3.Zero, Raylib.RED));
