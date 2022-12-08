@@ -6,7 +6,6 @@ using System.IO;
 using System.Numerics;
 using Engine3D.GameObjects;
 using Game.Data.Scenes.Test2.GameObjects;
-using Game.Data.Scenes.Test2.RenderPipeLine;
 using GameSimple.Models;
 using Newtonsoft.Json;
 using Raylib_CsLo;
@@ -31,11 +30,11 @@ scene.Camera3D = new Camera3D()
 };
 
 scene.Scripts = new List<string>();
-scene.RenderPipeline = new BasicLighting("Lighting", new ShaderFile()
+/*scene.RenderPipeline = new Game.Data.Scenes.Test2.BasicLighting("Lighting", new ShaderFile()
 {
     VertexShaderFile = @"C:\Users\VWi7M0N\RiderProjects\Engine3D\Game\Data\Scenes\Test2\Shader\base_lighting.vert",
     FragmentShaderFile = @"C:\Users\VWi7M0N\RiderProjects\Engine3D\Game\Data\Scenes\Test2\Shader\lighting.frag"
-});
+});*/
 
 
 

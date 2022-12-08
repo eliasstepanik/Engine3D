@@ -82,7 +82,8 @@
   "Scripts": [
     "FreeFlight.cs",
     "LightUpdate.cs",
-    "CubeUpdate.cs"
+    "CubeUpdate.cs",
+    "DebugText.cs"
   ],
   "RenderPipeline": {
     "Lights": null,

@@ -36,17 +36,17 @@ public class ScriptService
 
         foreach (var scene in _sceneService.LoadedScenes)
         {
-            /*Parallel.ForEach(scene.Scripts, i =>
+            Parallel.ForEach(scene.Scripts, i =>
             {
                 _logger.LogDebug("Found Script: Data/Scenes/{SceneName}/Scripts/{Script}", scene.Name, i);
                 _scripts.Add(CSScript.Evaluator.LoadFile($"Data/Scenes/{scene.Name}/Scripts/{i}"));
-            });*/
+            });
 
-            foreach (var sceneScript in scene.Scripts)
+            /*foreach (var sceneScript in scene.Scripts)
             {
                 _logger.LogDebug("Found Script: Data/Scenes/{SceneName}/Scripts/{Script}", scene.Name, sceneScript);
                 _scripts.Add(CSScript.Evaluator.LoadFile($"Data/Scenes/{scene.Name}/Scripts/{sceneScript}"));
-            }
+            }*/
         }
 
 

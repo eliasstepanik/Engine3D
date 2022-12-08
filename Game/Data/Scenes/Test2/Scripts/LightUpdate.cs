@@ -4,6 +4,7 @@ using System.Numerics;
 using Game.Data.Scenes.Test2.RenderPipeLine;
 using GameSimple.Models;
 using GameSimple.Models.ScriptInterfaces;
+using System;
 using Raylib_CsLo;
 
 public class LightInit : IScriptBehaviour
