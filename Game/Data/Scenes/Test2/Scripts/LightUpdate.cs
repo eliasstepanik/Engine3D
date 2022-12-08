@@ -8,7 +8,6 @@ using Raylib_CsLo;
 
 public class LightInit : IScriptBehaviour
 {
-    private Random _random;
     
     public ScriptDto Update(ScriptDto scriptDto)
     {
@@ -29,8 +28,7 @@ public class LightInit : IScriptBehaviour
 
     public ScriptDto Start(ScriptDto scriptDto)
     {
-        _random = new Random();
-        
+
         var rp = (BasicLighting)scriptDto.RenderPipeline;
         rp.Lights.Add(rp.CreateLight(LightType.LIGHT_POINT, new (-2,1,-2),Vector3.Zero, Raylib.YELLOW));
         rp.Lights.Add(rp.CreateLight(LightType.LIGHT_POINT, new (2,1,2),Vector3.Zero, Raylib.RED));

@@ -12,7 +12,20 @@ public abstract class GameObject
     public abstract Vector3 Scale { get; set; }
     public abstract Vector3 Rotation { get; set; }
     public abstract bool UI { get; set; }
-    public abstract void Draw();
+
+    public virtual void PreDraw()
+    {
+        rlPushMatrix();
+    }
+    public virtual void Draw()
+    {
+        rlRotatef(0, Rotation.X,Rotation.Y,Rotation.Z);
+    }
+
+    public virtual void PostDraw()
+    {
+        rlPopMatrix();
+    }
 
     //Write Constructor
     public GameObject(string name,string assemblyMarker, Vector3 position, Vector3 scale, Vector3 rotation, bool ui)
