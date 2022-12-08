@@ -46,7 +46,15 @@ public unsafe class Engine
         var app = services.BuildServiceProvider();
 
         //Set Custom Raylib Logger
-        SetTraceLogCallback(&CustomLogging.LogCustom);
+
+        if (OperatingSystem.IsWindows())
+        {
+            SetTraceLogCallback(&CustomLogging.LogCustom);
+        }
+        else
+        {
+            SetTraceLogCallback(&CustomLogging.LogCustomAny);
+        }
         
         if (settings.WindowSettings.MSAA4x)
             SetConfigFlags(ConfigFlags.FLAG_MSAA_4X_HINT);

@@ -22,6 +22,9 @@ public class Cube : GameObject
     public override bool UI { get; set; }
     public override void Draw()
     {
+        base.PreDraw();
+        base.Draw();
         DrawCubeV(Position, Scale, Color);
+        base.PostDraw();
     }
 }
