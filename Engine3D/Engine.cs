@@ -40,6 +40,7 @@ public unsafe class Engine
         services.AddSingleton<WindowService>();
         services.AddSingleton<SceneService>();
         services.AddSingleton<ScriptService>();
+        services.AddSingleton<PhsicsService>();
         services.AddSingleton<ShaderService>();
         services.AddSingleton<CSScriptLib.Settings>();
 
@@ -70,16 +71,19 @@ public unsafe class Engine
         var s = app.GetRequiredService<SceneService>();
         var ss = app.GetRequiredService<ScriptService>();
         var shs = app.GetRequiredService<ShaderService>();
+        var phs = app.GetRequiredService<PhysicsService>();
         
         w.CreateWindow();
         s.Start(SceneName,GameName);
         shs.Start(SceneName);
         ss.Start();
+        phs.Start();
 
         while (!WindowShouldClose())
         {
             w.Update();
             ss.Update();
+            phs.Update();
             shs.Draw();
             w.Draw();
         

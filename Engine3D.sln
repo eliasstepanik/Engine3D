@@ -6,6 +6,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game", "Game\Game.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SceneBuilder", "SceneBuilder\SceneBuilder.csproj", "{8321D1C1-01A0-4CE5-A378-52357F009111}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepuPhysics", "BepuPhysics\BepuPhysics.csproj", "{D6DC9850-6164-417A-96AA-B3E9AF28607D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepuUtilities", "BepuUtilities\BepuUtilities.csproj", "{0200D747-C87D-4F35-AD87-752EAFBAC304}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +28,13 @@ Global
 		{8321D1C1-01A0-4CE5-A378-52357F009111}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8321D1C1-01A0-4CE5-A378-52357F009111}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8321D1C1-01A0-4CE5-A378-52357F009111}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6DC9850-6164-417A-96AA-B3E9AF28607D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6DC9850-6164-417A-96AA-B3E9AF28607D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6DC9850-6164-417A-96AA-B3E9AF28607D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6DC9850-6164-417A-96AA-B3E9AF28607D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0200D747-C87D-4F35-AD87-752EAFBAC304}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0200D747-C87D-4F35-AD87-752EAFBAC304}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0200D747-C87D-4F35-AD87-752EAFBAC304}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0200D747-C87D-4F35-AD87-752EAFBAC304}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
