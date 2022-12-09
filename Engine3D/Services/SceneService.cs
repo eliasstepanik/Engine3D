@@ -28,16 +28,33 @@ public class SceneService
         _serviceProvider = serviceProvider;
     }
 
-    public void Start(string Name)
+    public void Start(string Name, string GameName)
     {
         LoadedScenes = new List<Scene>();
-        LoadScene(Read(Name));
+
+        var scene = Read(Name,GameName);
+        if (scene == null)
+        {
+            _logger.LogWarning("No Scenen found.");
+            return;
+        }
+            
+        
+        LoadScene(scene);
     }
 
-    public void Update(string Name)
+    public void Update(string Name, string GameName)
     {
         LoadedScenes = new List<Scene>();
-        LoadScene(Read(Name));
+        
+        var scene = Read(Name,GameName);
+        if (scene == null)
+        {
+            _logger.LogWarning("No Scenen found.");
+            return;
+        }
+        
+        LoadScene(scene);
     }
     
     public void LoadScene(Scene scene)
@@ -64,7 +81,7 @@ public class SceneService
     }
     
     
-    public Scene Read(string Name)
+    public Scene Read(string Name, string GameName)
     {
         var json = File.ReadAllText($"Data/Scenes/{Name}/{Name}.json");
         //var scene =(IScene) Data.LoadPDP(Name);
@@ -81,7 +98,7 @@ public class SceneService
         System.Type[] typesCurrentProject = System.Reflection.Assembly.GetExecutingAssembly().GetTypes();
         List<System.Type[]> typesGameProject = new List<Type[]>();
 
-        foreach (var assembly in GetGameAssembly())
+        foreach (var assembly in GetGameAssembly(GameName))
         {
             typesGameProject.Add(assembly.GetTypes());
         }
@@ -139,9 +156,9 @@ public class SceneService
 
     }
 
-    public static Assembly[] GetGameAssembly()
+    public static Assembly[] GetGameAssembly(string GameName)
     {
-        var assemblies = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "Game.dll")
+        var assemblies = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, GameName + ".dll")
             .Select(x => Assembly.Load(AssemblyName.GetAssemblyName(x)));
         return assemblies.ToArray();
     }

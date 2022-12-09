@@ -29,6 +29,7 @@ public class Text : GameObject
     
     public override void Draw()
     {
+        base.Draw();
         DrawText(Content,Position.X,Position.Y,FontSize,Color);
     }
 

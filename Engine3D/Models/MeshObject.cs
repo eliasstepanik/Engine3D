@@ -10,4 +10,14 @@ public abstract class MeshObject : GameObject
     }
     
     public abstract Model Model { get; set; }
+
+    public override void Draw()
+    {
+        base.Draw();
+        var model = Model;
+        model.transform = MatrixRotateXYZ(new( DEG2RAD*Rotation.X, DEG2RAD*Rotation.Y, DEG2RAD*Rotation.Z ));
+        Model = model;
+        
+        
+    }
 }

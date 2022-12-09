@@ -22,10 +22,14 @@ public class ShaderService
         _serviceProvider = serviceProvider; 
     }
 
-    public void Start()
+    public void Start(string Scene)
     {
-        RenderPipeline = _sceneService.LoadedScenes.First().RenderPipeline; 
+        var renderPipeline = _sceneService.LoadedScenes.First(x => x.Name.Equals(Scene)).RenderPipeline;
+        if(renderPipeline == null)
+             return;
         
+        
+        RenderPipeline = renderPipeline;
         ScriptDto scriptDto = new();
         scriptDto.Camera = _windowService.Camera;
         scriptDto.LoadedScenes = _sceneService.LoadedScenes;

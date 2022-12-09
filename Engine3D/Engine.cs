@@ -15,7 +15,7 @@ using Settings = GameSimple.Models.Settings;
 
 public unsafe class Engine
 {
-    public void Create(string SceneName)
+    public void Create(string SceneName, string GameName)
     {
         var settings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText("Config/Settings.json"));
 
@@ -72,8 +72,8 @@ public unsafe class Engine
         var shs = app.GetRequiredService<ShaderService>();
         
         w.CreateWindow();
-        s.Start(SceneName);
-        shs.Start();
+        s.Start(SceneName,GameName);
+        shs.Start(SceneName);
         ss.Start();
 
         while (!WindowShouldClose())

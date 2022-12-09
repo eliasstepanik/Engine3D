@@ -19,9 +19,6 @@ public class VoxelWorld : GameObject
     public override bool UI { get; set; }
     public override void Draw()
     {
-        base.PreDraw();
         base.Draw();
-        
-        base.PostDraw();
     }
 }

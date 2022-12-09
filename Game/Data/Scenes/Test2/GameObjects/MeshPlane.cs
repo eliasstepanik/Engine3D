@@ -22,12 +22,10 @@ public class MeshPlane : MeshObject
     public override bool UI { get; set; }
     
     public Color Color { get; set; }
-    public override void Draw()
+    public  override void Draw()
     {
-        base.PreDraw();
         base.Draw();
         Raylib.DrawModel(Model, Position, 1.0f, Color);
-        base.PostDraw();
     }
 
     public override Model Model { get; set; }

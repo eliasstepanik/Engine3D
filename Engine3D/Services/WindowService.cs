@@ -59,18 +59,25 @@ public class WindowService
 
         BeginMode3D(Camera);
 
-        foreach (var gameObject in RenderQueue)
+        if (RenderQueue.Count() != 0)
         {
-            if(!gameObject.UI){
-                gameObject.Draw();
+            foreach (var gameObject in RenderQueue)
+            {
+                if(!gameObject.UI){
+                    gameObject.Draw();
+                }
             }
         }
+        
         EndMode3D();
         
-        foreach (var gameObject in RenderQueue)
+        if (RenderQueue.Count() != 0)
         {
-            if(gameObject.UI){
-                gameObject.Draw();
+            foreach (var gameObject in RenderQueue)
+            {
+                if(gameObject.UI){
+                    gameObject.Draw();
+                }
             }
         }
         if(_settings.WindowSettings.ShowFPS)

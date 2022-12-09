@@ -34,8 +34,14 @@ public class ScriptService
         _scripts = new List<dynamic>();
         _dynamicData = new Dictionary<string, dynamic>();
 
+        if(_sceneService.LoadedScenes == null)
+            return;
+        
         foreach (var scene in _sceneService.LoadedScenes)
         {
+            if (scene.Scripts == null)
+                return;
+            
             Parallel.ForEach(scene.Scripts, i =>
             {
                 _logger.LogDebug("Found Script: Data/Scenes/{SceneName}/Scripts/{Script}", scene.Name, i);
